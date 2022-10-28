@@ -54,11 +54,14 @@ public class GiveCommand extends Command {
             ));
             Player player = Bukkit.getPlayer(user.getUuid());
             if (player != null) {
-                player.sendMessage(StringUtils.color(IridiumMobCoins.getInstance().getMessages().receivedMobCoins
-                        .replace("%prefix%", IridiumMobCoins.getInstance().getConfiguration().prefix)
-                        .replace("%player%", user.getName())
-                        .replace("%amount%", String.valueOf(amount))
-                ));
+                String awardMsg = IridiumMobCoins.getInstance().getMessages().receivedMobCoins;
+                if (awardMsg.length() != 0) {
+                    player.sendMessage(StringUtils.color(awardMsg
+                            .replace("%prefix%", IridiumMobCoins.getInstance().getConfiguration().prefix)
+                            .replace("%player%", user.getName())
+                            .replace("%amount%", String.valueOf(amount))
+                    ));
+                }
             }
         } else {
             sender.sendMessage(StringUtils.color(IridiumMobCoins.getInstance().getMessages().unknownPlayer
